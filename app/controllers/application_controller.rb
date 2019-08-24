@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   protect_from_forgery with: :exception
   before_action :authenticate_tenant!
   
@@ -8,5 +9,8 @@ class ApplicationController < ActionController::Base
   rescue_from ::Milia::Control::InvalidTenantAccess, :with => :invalid_tenant
 
   before_action  :authenticate_tenant!
+
+
+  
 
 end
