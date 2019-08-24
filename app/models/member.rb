@@ -10,7 +10,7 @@ class Member < ApplicationRecord
 
   def self.create_new_member(user, params)
     # add any other initialization for a new member
-    return user.create_member( params )
+    return user.create_member(params)
   end
 
   def self.create_org_admin(user)
