@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
  
+  resources :artifacts
   #mak sures the pprojects underneath the tenants
   resources :tenants do 
     resources :projects
