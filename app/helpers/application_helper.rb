@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def s3_link(tenat_id,artifact_key)
-    link_to  "#{artifact_key}", class: 'main-link', target: 'new'
+    link_to artifact_key, "#{artifact_key}", class: 'main-link', target: :_blank 
   end
 
 end
