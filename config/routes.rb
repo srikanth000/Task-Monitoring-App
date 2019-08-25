@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
  
-
-
+  #mak sures the pprojects underneath the tenants
+  resources :tenants do 
+    resources :projects
+  end
   resources :members
   get 'home/index'
 
