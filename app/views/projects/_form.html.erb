@@ -14,7 +14,7 @@
       </div>
     </div>
   <% end %>
-
+<br><br>
   <div class="form-group">
     <%= f.label :title, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
@@ -29,15 +29,16 @@
     </div>
    
   </div>
+  
+
   <div class="form-group">
-    <%= f.label :expected_completion_date, :class => 'control-label col-lg-2
-    datepicker' %>
+    <%= f.label :expected_completion_date, :class => 'control-label col-lg-2' %> 
     <div class="col-lg-10">
-      <%= f.text_field :expected_completion_date, :class => 'form-control' %>
+      <%= f.text_field :expected_completion_date, :class => 'form-control datepicker' %>
     </div>
-    
-  </div>
-  <br>
+ 
+ </div>
+  <br />
   <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class =>'form-control' %>
 
   <div class="form-group">

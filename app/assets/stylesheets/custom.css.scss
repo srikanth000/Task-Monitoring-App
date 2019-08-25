@@ -125,3 +125,8 @@ no-right-padding {
     background:none;
   }
 }
+
+.ui-datepicker { 
+  margin-left: 100px;
+  z-index: 1000;
+}
