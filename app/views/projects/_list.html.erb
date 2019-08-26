@@ -9,6 +9,7 @@
         <th><%= model_class.human_attribute_name(:title) %></th>
         <th><%= model_class.human_attribute_name(:details) %></th>
         <th><%= model_class.human_attribute_name(:expected_completion_date) %></th>
+        <th><%= model_class.human_attribute_name(:status) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
     </thead>
@@ -18,6 +19,15 @@
           <td><%= link_to project.title, tenant_project_path(project,tenant_id: @tenant.id), class: 'main-link' %></td>
           <td><%= project.details %></td>
           <td><%= project.expected_completion_date %></td>
+          <td>
+              <% if project.status.upcase =='INPROGRESS'%>
+                <button class="btn btn-success btn-xs"> <%= project.status %></button>
+              <% elsif project.status.upcase =='SUSPENDED' %>
+                <button class="btn btn-primary btn-xs"> <%= project.status %></button>
+              <% else %>
+                 <button class="btn btn-danger btn-xs"> <%= project.status %></button>
+              <% end %>
+         </td>
           <td>
             <% if current_user  && current_user.is_admin? %>
               

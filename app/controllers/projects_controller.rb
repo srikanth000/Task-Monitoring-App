@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to root_url, notice: 'Project was successfully updated.' }
+        format.html { redirect_to root_url, notice: "Project was successfully updated.#{project_params[:status]}" }
       else
         format.html { render :edit }
       end
@@ -88,7 +88,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :details, :expected_completion_date, :tenant_id)
+      params.require(:project).permit(:title, :details, :expected_completion_date, :tenant_id, :status)
     end
 
     def set_tenant
