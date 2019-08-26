@@ -20,7 +20,7 @@
           <td><%= project.details %></td>
           <td><%= project.expected_completion_date %></td>
           <td>
-            <% if project.status.nil? %>
+            <% if !project.status.nil? %>
               <% if project.status.upcase =='INPROGRESS'%>
                 <button class="btn btn-success btn-xs"> <%= project.status %></button>
               <% elsif project.status.upcase =='SUSPENDED' %>
@@ -30,7 +30,7 @@
               <% end %>
             <% else %>
               INPROGRESS
-            <% end %>
+            <% end%>
          </td>
           <td>
             <% if current_user  && current_user.is_admin? %>
