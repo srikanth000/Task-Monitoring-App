@@ -2,7 +2,7 @@ class Project < ApplicationRecord
   belongs_to :tenant
   validates_uniqueness_of :title
   has_many :artifacts, dependent: :destroy
-  has_many :user_projects
+  has_many :user_projects ,dependent: :destroy
   has_many :users, through: :user_projects
   validate :free_plan_can_only_have_one_project
 
