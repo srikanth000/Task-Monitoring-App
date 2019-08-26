@@ -33,6 +33,9 @@
 
           <p>No Users associated with this project</p>
           <p>Please invite and add.</p>
+          <p>    <%= link_to "<i class='fa fa-users'></i> Add Members".html_safe,
+                      new_member_path,
+                      class: 'navbar-link btn btn-primary' %> </p>
 
         <% end %>
       </div>
