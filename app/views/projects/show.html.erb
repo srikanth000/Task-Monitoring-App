@@ -1,36 +1,74 @@
 <%- model_class = Project -%>
 <div class="page-header">
-  <h3><%= @project.title %></h3>
-  <h3><small>Organisation - <%= tenant_name @project.tenant_id%></small></h3>
+  <h3><strong><%= @project.title.capitalize %></strong></h3>
+   <% @org_name =  tenant_name @project.tenant_id %>
+  <h3><small>Organisation - <%= link_to @org_name, root_path%></small></h3>
 </div>
+  <ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#home"><strong>Project-Details</strong></a></li>
+    <li><a data-toggle="tab" href="#menu1"><strong>Upload-Files</strong></a></li>
+    <li><a data-toggle="tab" href="#menu2"><strong>Discussion</strong></a></li>
+    <li class="active"><a data-toggle="tab" href="#menu3"><strong>Actions</strong></a></li>
+    <li><a data-toggle="tab" href="#menu4"><strong>Contact</strong></a></li>
+  </ul>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @project.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:details) %>:</strong></dt>
-  <dd><%= @project.details %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:expected_completion_date) %>:</strong></dt>
-  <dd><%= @project.expected_completion_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tenant_id) %>:</strong></dt>
-  <dd><%= @project.tenant_id %></dd>
-</dl>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= model_class.human_attribute_name(:title) %>:</th>
+              <th><%= model_class.human_attribute_name(:details) %>:</th>
+              <th><%= model_class.human_attribute_name(:expected_completion_date) %>:</th>
+              <th><%= model_class.human_attribute_name(:tenant_id) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @project.title %></td>
+              <td><%= @project.details %></td>
+              <td><%= @project.expected_completion_date %></td>
+              <td><%= @project.tenant_id %></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <%= render 'artifacts/list', artifacts: @project.artifacts%>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      
+      <p>Coming Soon..</p>
+    </div>
+    <div id="menu3" class="tab-pane fade  in active">
+      <br><br>
+      <div class="center">
+        <%= link_to 'Back to Organisation Home', root_path, :class => 'btn btn-default' %>
+        <% if current_user  && current_user.is_admin? %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_tenant_project_path(project: @project, tenant: @project.tenant_id), :class => 'btn btn-default' %>
 
-<h3>Artifacts</h3>
-<%= render 'artifacts/list', artifacts: @project.artifacts%>
+          <%= link_to 'Edit Project Users', users_tenant_project_path(tenant_id: @project.tenant_id, id:@project.id),
+           :class => 'btn btn-default'  %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                       tenant_project_path(@project, @project.tenant_id),
+                        :method => 'delete',
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-danger' %>
+        <% end %>
+      </div>
+
+     
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      
+      <p>Comming Soon..</p>
+    </div>
+  </div>
+
+
+
 <br />
 <br />
 
 
-<%= link_to 'Back to Organisation Home', root_path, :class => 'btn btn-default' %>
-  <% if current_user  && current_user.is_admin? %>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_tenant_project_path(project: @project, tenant: @project.tenant_id), :class => 'btn btn-default' %>
-
-    <%= link_to 'Edit Project Users', users_tenant_project_path(tenant_id: @project.tenant_id, id:@project.id),
-     :class => 'btn btn-default'  %>
-    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                 tenant_project_path(@project, @project.tenant_id),
-                  :method => 'delete',
-                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                  :class => 'btn btn-danger' %>
-  <% end %>

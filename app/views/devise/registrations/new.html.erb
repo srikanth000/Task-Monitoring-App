@@ -1,49 +1,57 @@
-<h1><%= t('.sign_up') %></h1>
 
 <%= bootstrap_devise_error_messages! %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><%= t('.sign_up', :default => "Sign up") %></h4>
-  </div>
-  <div class="panel-body">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= bootstrap_devise_error_messages! %>
-
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><%= t('.sign_up', :default => "Sign up") %></h4>
       </div>
+      <div class="panel-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= bootstrap_devise_error_messages! %>
 
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
-
-        <% if @minimum_password_length %>
-          <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
-        <% end %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
-      </div>
-      <%= fields_for( :tenant ) do |w| %>
-            <div class="form-group col-md-6 no-left-padding">
-              <%= w.label :name, 'Organization' %>
-              <span class='description'>(Unique name for your group or organization for the new account)</span>
-              <%= w.text_field :name, required: true, class: "form-control" %>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
             </div>
-            <div class="form-group col-md-6 no-right-padding">
-              <%= w.label :plan %>
-              <%= w.select :plan, options_for_select(Plan.options, params[:plan]), {}, required: true, 
-              class: "form-control" %>
+
+            <div class="form-group">
+              <%= f.label :password %>
+              <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
+
+              <% if @minimum_password_length %>
+                <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+              <% end %>
             </div>
-      <% end %>
-      <div class="form-group">
-        <%= f.submit t('.sign_up'), class: 'btn btn-primary' %>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
+            </div>
+            <%= fields_for( :tenant ) do |w| %>
+                  <div class="form-group col-md-6 no-left-padding">
+                    <%= w.label :name, 'Organization' %>
+                    
+                    <%= w.text_field :name, required: true, class: "form-control" ,placeholder: "Please mention your own"%>
+                  </div>
+                  <div class="form-group col-md-6 no-right-padding">
+                    <%= w.label :plan %> 
+                    
+                    <%= w.select :plan, options_for_select(Plan.options, params[:plan]), {}, required: true, placeholder: "Current Version allows Free only",
+                    class: "form-control" %>
+                  </div>
+            <% end %>
+            <div class="form-group center">
+              <%= f.submit t('.sign_up'), class: 'btn btn-success' %>
+            </div>
+            <%= render 'devise/shared/links' %>
+
+          <% end %>
+        </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+    <div class="col-md-2"></div>
+    </div>
 </div>
 
-<%= render 'devise/shared/links' %>
