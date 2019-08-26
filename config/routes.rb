@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
  
+  resources :user_projects
   resources :artifacts
   #mak sures the pprojects underneath the tenants
   resources :tenants do 
-    resources :projects
+    resources :projects do
+      get 'users', on: :member
+      put 'add_user', on: :member
+
+    end
   end
   resources :members
   get 'home/index'
@@ -17,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, :controllers => { 
-    :registrations => "milia/registrations",
+    :registrations => "registrations",
     :confirmations => "confirmations",
     :sessions => "milia/sessions", 
     :passwords => "milia/passwords", 

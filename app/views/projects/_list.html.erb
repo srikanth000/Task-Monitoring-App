@@ -19,14 +19,18 @@
           <td><%= project.details %></td>
           <td><%= project.expected_completion_date %></td>
           <td>
+            <% if current_user  && current_user.is_admin? %>
+              
            
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_tenant_project_path(project, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                       tenant_project_path(project,tenant_id: @tenant.id),
-                        :method => :delete,
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-xs btn-danger' %>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                          edit_tenant_project_path(project, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
+              <%= link_to 'Edit Users', users_tenant_project_path(project, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs'%>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                         tenant_project_path(project,tenant_id: @tenant.id),
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'btn btn-xs btn-danger' %>
+            <% end %>
           </td>
         </tr>
       <% end %>
