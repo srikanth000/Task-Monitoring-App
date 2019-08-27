@@ -51,7 +51,11 @@
     </tbody>
   </table>
 <% else %>
-  <p class="lead"> You do not have any projects created.</p>
+   <p class="lead"> You do not have any projects assigned.</p>
+  <% if !current_user.is_admin? %>
+      <p><strong>Please wait for the confirmation by your Manager and visit again.</strong></p>
+  
+  <% end %>
 <% end %>
 <% if (@tenant.can_create_projects?  && current_user.is_admin? ) %>
   <%= link_to "New Project", new_tenant_project_path(tenant_id: @tenant.id),
