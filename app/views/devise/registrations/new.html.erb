@@ -38,7 +38,7 @@
                   <div class="form-group col-md-6 no-right-padding">
                     <%= w.label :plan %> 
                     
-                    <%= w.select :plan, options_for_select(Plan.options, params[:plan]), {}, required: true, placeholder: "Current Version allows Free only",
+                    <%= w.select :plan, options_for_select(Plan.options, params[:free]), {}, required: true, placeholder: "Current Version allows Free only",
                     class: "form-control" %>
                   </div>
             <% end %>
